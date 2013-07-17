@@ -1,0 +1,35 @@
+<table width="100%" bgcolor="#AAAAAA" >
+	<tr>
+		<td height="30" width="100" align="left" >
+			<div align="left">
+				<form>
+					<a href="{{ url_for('index') }}">
+						<input type="button" value="To main">
+					</a>
+				</form>
+			</div>
+		</td>
+		<td height="30" align="center" >
+			<div align="center" >
+			</div>
+		</td>
+		<td  height="30" width="300" align="right" >
+			<div align="right">
+				<form>
+					{% if user %}
+					<label> User: {{ user }}</label>
+					<form>
+						<a href="{{ url_for('logout') }}">
+							<input type="button" value="Logout">
+						</a>
+					</form>
+					{% else %}
+					<a href="{{ url_for('login') }}">
+						<input type="button" value="Login page">
+					</a>
+					{% endif -%}
+				</form>
+			</div>
+		</td>
+	</tr>
+</table>

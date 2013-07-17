@@ -1,0 +1,94 @@
+{% extends 'layout.html' %}
+{% block title %}Plitka{% endblock %}
+{% block java_script %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/main/jquery.js') }}" ></script>
+<script  type="text/javascript">
+function delete_item(id)
+{	
+	if(confirm("Delete?"))
+	{
+		$.ajax({
+			type: "POST",
+			url: "/delete_collection",
+			data: {'id':id},
+			success: function(data){ 
+				if (data.error) print_error(String(data.error));
+				else window.location.reload(); 
+			},
+			error: function (xhr, thrownError) 
+			{
+				alert("Ajax Error");
+			},
+			dataType: "JSON"
+		});
+	}
+}
+function print_error(error)
+{
+	$("label[name='error_message']").text('Error: ' +  error ).html();
+}
+</script>
+{% endblock %}
+{% block content %}
+<table width="100%" >
+	<tr align="left">
+		<td align="left" width="100">
+			<a href="{{ url_for('grid') }}">Grid view style</a>
+		</td>
+		<td align="left">
+			<form><a href="{{ url_for('add_collection') }}"><input type="button" value="Add Collection" ></a></form>
+		</td>
+	</tr>
+</table>
+<table align="center" class="image_grid" >
+	{% for item in items %}
+	{% if loop.index % 5 == 1 %}
+	<tr>
+		{% endif %}
+		<td align="left">
+			<table height="180" width="180">
+				<tr align="center" valign="middle">
+					<td align="center" valign="middle">
+						<table border="0" bgcolor="#AFFFAF">
+							<tr>
+								<td align="left" valign="top" width="15" height="15">
+								</td>
+								<td align="center" valign="top" width="100" height="15">
+								</td>
+								<td align="right" valign="top" height="15">
+									<img src="/static/css/images/image_close.png" height="15" width="15" onclick="delete_item('{{ item.id }}');">
+								</td>
+							</tr>
+							<tr>
+								<td align="left" valign="top" width="15">
+								</td> <td align="center" valign="middle">
+								<table border="0">
+									<tr>
+										<td>
+											<img src="{{ item.image_url }}" height="100" width="100">
+										</td>
+									</tr>
+									<tr>
+										<td height="20" width ="100" align="center">
+											<label>{{ item.collection_name }}</label>
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td align="right" valign="top" height="15">
+								<a href="{{ url_for('edit_collection') }}?collection_id={{ item.id }}"><img src="/static/css/images/image_edit.png" height="15" width="15" ></a>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</td>
+{% if loop.index % 5 == 0 or loop.last %}
+</tr>
+{% endif %} 
+{% endfor %}
+</table>
+<div "error_message"><font color="red"><label name="error_message"></label></font>
+</div>
+{% endblock %}

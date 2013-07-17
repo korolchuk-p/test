@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% block title %}Registration page{% endblock %}
+{% block java_script %}
+{% endblock %}
+{% block content %}
+
+<form action="http://127.0.0.1:5000/regist" method="POST">
+	<table class="login">
+		<tr>
+			<td>
+				<p>
+					<strong>Registration page</label>
+					</strong>
+				</p>
+				<br>
+			</td>
+		</tr>
+		{% if error_message %}
+		<tr>
+			<td>
+				<p>
+					<strong>{{error_message}}</label>
+					</strong>
+				</p>
+				<br>
+			</td>
+		</tr>
+		{% endif %}
+		<tr>
+			<td>
+				<p>
+					<strong>
+						<label for="email">Email</label>
+					</strong>
+				</p>
+				<input type="text" name="email" value="{{email}}" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<strong>
+						<label for="f_name">First name</label>
+					</strong>
+				</p>
+				<input type="text" name="f_name" value="{{f_name}}" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<strong>
+						<label for="l_name">Last name</label>
+					</strong>
+				</p>
+				<input type="text" name="l_name"  value="{{l_name}}" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<strong>
+						<label for="password1">Password</label>
+					</strong>
+				</p>
+				<input type="password" name="password" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<strong>
+						<label for="password2">Repeat password</label>
+					</strong>
+				</p>
+				<input type="password" name="password2" />
+			</td>
+		</tr>
+		<tr class="cl_sub_01">
+			<td align="center" >
+				<input type="submit" value="Register" />
+			</td>
+		</tr>
+	</table>	
+</form>
+{% endblock %}
+

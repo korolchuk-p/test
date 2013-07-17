@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block title %}Login page{% endblock %}
+{% block java_script %}
+{% endblock %}
+{% block header %}
+<table height="30" width="100%" bgcolor="#60FF60" >
+	<tr>
+		<td>
+		</td>
+	</td>
+</tr>
+</table>
+{% endblock %}
+{% block content %}
+
+<form action="http://127.0.0.1:5000/login" method="POST">
+	<table class="login" style="margin-left: auto; margin-right: auto;">
+		{% if error_message %}
+		<tr>
+			<td>
+				<p>
+					<strong>{{error_message}}</label>
+					</strong>
+				</p>
+				<br>
+			</td>
+		</tr>
+		{% endif %}
+		<tr>
+			<td>
+				<p>
+					<strong>Login page</label>
+					</strong>
+				</p>
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<strong>
+						<label for="email">Email</label>
+					</strong>
+				</p>
+				<input id="email" type="text" name="email" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<p>
+					<strong>
+						<label for="password">Password</label>
+					</strong>
+				</p>
+				<input type="password" name="password" />
+			</td>
+		</tr>
+		<tr>
+			<td style="padding-top: 10px;">
+				<input type="submit" value="Log in" />
+				<a href="/regist">
+					<input type="button" value="Registration">
+				</a>
+			</td>
+		</tr>
+	</table>
+</form>
+{% endblock %}

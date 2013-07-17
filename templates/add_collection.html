@@ -1,0 +1,33 @@
+{%- extends 'layout.html' -%}
+{%- block title -%}Plitka{%- endblock -%}<!--
+{%- block java_script -%} 
+<script type="text/javascript" src="{{ url_for('static', filename='js/main/jquery.js') }}" ></script>
+<script  type="text/javascript">
+
+</script>
+{%- endblock -%} -->
+{%- block content -%}
+<table align="center"  >
+	<tr height="25" width="100%">
+		<td align="center">
+			<label>New collection</label>
+		</td>
+	</tr>
+	<tr>
+		<td align="left">
+			<label>Name:</label><br>
+			<form action="{{ url_for('add_collection') }}" method="POST">
+				<input name="collection_name" type="text" value="">
+				<input type="submit" value="Save">
+			</form>
+		</td>
+	</tr>
+	{% if error_message %}
+	<tr>
+		<td align="left">
+			<label>{{ errror_message }}</label>
+		</td>
+	</tr>
+	{% endif %}
+</table>
+{% endblock %}

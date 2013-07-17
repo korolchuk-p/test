@@ -1,0 +1,8 @@
+*.py[cod]
+*.sublime-*
+goods/static/photos/*
+*.db
+test/cookie.txt
+test/cookie_local.txt
+test/curl.txt
+env/*

@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% block title %}Grid{% endblock %}
+{% block java_script %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/ui.jqgrid.css') }}" />
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/jquery-ui-custom.css') }}" />
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/ui.multiselect.css') }}" />
+<script type="text/javascript" src="{{ url_for('static', filename='js/main/jquery.js') }}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jqgrid/jquery.jqGrid.js' )}}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jqgrid/jquery.tablednd.js' )}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jqgrid/jquery.contextmenu.js' )}}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jqgrid/jquery.layout.js' )}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jqgrid/jquery-ui-custom.min.js' )}}" ></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jqgrid/ui.multiselect.js' )}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/jqgrid/grid.locale-en.js' )}}" ></script>
+
+<script  type="text/javascript">
+
+$("#list1").ready(function(){
+
+  jQuery("#list1").jqGrid({
+    url:'/col',
+    datatype: "json",
+    colNames:['Id','Name'],
+    colModel:[
+    {name:'id',index:'id', width:60, sorttype:"int", editable: false},
+    {name:'name',index:'name', width:150, editoptions:{size:"20",maxlength:"30"}, editable: true},
+    ],
+    rowNum:20,
+    rowList:[10,20,50,100],
+    pager: '#pager1',
+    sortname: 'id',
+    onSelectRow: function(id){
+      if(id && id!==lastsel){
+        jQuery('#list1').jqGrid('restoreRow',lastsel);
+        jQuery('#list1').jqGrid('editRow',id,true);
+        lastsel=id;
+      }
+    },
+    gridComplete: function () {
+      if ($('#list1').jqGrid('getRowData').length > 0)
+      {
+
+       var data = $('#list1').jqGrid('getRowData')[0];
+       if ((data.id=="error") && (data.name=="not authenticated")) window.location.reload();
+     }
+   },
+   width:600,
+   height:300,
+   editurl: "/save_grid_changes",
+   viewrecords: true,
+   sortorder: "desc",
+   caption:"Id's and names"
+ });
+
+  jQuery("#list1").jqGrid('navGrid','#pager1',{edit:true,add:true,del:true});
+
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('plitka') }}">Plitka view style</a><br>
+<table id="list1"></table>
+<table id="pager1"></table>
+{% endblock %}

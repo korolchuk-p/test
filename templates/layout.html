@@ -1,0 +1,51 @@
+<html>
+<head>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+  <title>{% block title %}{% endblock %}</title>
+  {% block java_script %}
+  {% endblock %}
+</head>
+<body>
+  <table width="100%" >
+    <tr>
+      <td>
+        <div id="header">
+          {% block header %}
+          {% include 'header.html' %}
+          {% endblock %}
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="content">
+          <table width="100%" height="100%" bgcolor="#FFFFA0" >
+            <tr>
+              <td>
+                {% block content %}{% endblock %}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div id="coper_end">
+          <table width="100%" bgcolor="#AFFFAF" >
+            <tr>
+              <td height="20" align="center" >
+                {% block footer %}
+                <div align="center">
+                  {% include 'footer.html' %}
+                </div>
+                {% endblock %}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </tr>
+    </td>
+  </table>
+</body>
+</html>
